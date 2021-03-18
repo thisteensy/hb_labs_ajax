@@ -55,7 +55,7 @@ def weather():
 def order_melons():
     """Order melons and return a dictionary of result-code and result-msg."""
 
-    melon = request.form.get('melon_type')
+    melon = request.form.get('medlon_type')
     qty = int(request.form.get('qty'))
 
     if qty > 10:
