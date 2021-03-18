@@ -5,11 +5,15 @@
 
 function showFortune(evt) {
 
-    // TODO: get the fortune and show it in the #fortune-text div
+$.get('/fortune', (response) => {
+  $('#fortune-text').html(response);
+    
+});
+
 }
 
-$('#get-fortune-button').on('click', showFortune);
-
+$('#get-fortune-button').on('click', showFortune); 
+  
 
 
 
@@ -22,10 +26,10 @@ function showWeather(evt) {
     let url = "/weather.json";
     let formData = {"zipcode": $("#zipcode-field").val()};
 
-
-    // TODO: request weather with that URL and show the forecast in #weather-info
+    $.get(url, formData, (response) => {
+        $('#weather-info').html(response.forecast)
+    });
 }
-
 $("#weather-form").on('submit', showWeather);
 
 
@@ -36,10 +40,19 @@ $("#weather-form").on('submit', showWeather);
 function orderMelons(evt) {
     evt.preventDefault();
 
+  const melonsData = {"melon-type": $('#melon-type-field').val(),
+      "qty": $('#qty-field').val()
+    }; 
+    
+  $.post('/order-melons.json'), melonsData, (response) => {
+      alert(`{response.code} {response.msg}`)
+    //   alert(response['code'], response['msg'])
+      
+  } 
     // TODO: show the result message after your form
     // TODO: if the result code is ERROR, make it show up in red (see our CSS!)
 }
-
+  
 $("#order-form").on('submit', orderMelons);
 
 
